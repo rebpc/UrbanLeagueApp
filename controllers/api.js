@@ -3,7 +3,6 @@ var querystring = require('querystring');
 var validator = require('validator');
 var async = require('async');
 var request = require('request');
-var graph = require('fbgraph');
 var Twit = require('twit');
 var Y = require('yui/yql');
 var _ = require('lodash');
