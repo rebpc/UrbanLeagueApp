@@ -11,7 +11,6 @@ var errorHandler = require('errorhandler');
 var lusca = require('lusca');
 var methodOverride = require('method-override');
 var multer  = require('multer');
-//var handlebars = require('express4-handlebars');
 var exphbs = require('express-handlebars');
 
 
@@ -125,8 +124,14 @@ app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
+*/
+app.get('/register', userController.getRegister);
+app.post('/register', userController.postRegister);
+
+>>>>>>> Updated Select a time page to display proper dates. Added contact page.
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
+/*
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
