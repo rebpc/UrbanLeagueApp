@@ -73,13 +73,14 @@ exports.getRegister = function(req, res) {
 exports.postRegister = function(req, res, next) {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('password', 'Your password must be at least 6 characters long').len(6);
-  req.assert('passwordConfirm', 'Passwords do not match').equals(req.body.password);  req.assert('nameLast', 'You must enter a first name').notEmpty();
+  req.assert('passwordConfirm', 'Passwords do not match').equals(req.body.password);
+  req.assert('nameLast', 'You must enter a last name').notEmpty();
   req.assert('nameFirst', 'You must enter a first name').notEmpty();
   req.assert('address1', 'You must enter a valid street address.').notEmpty();
   req.assert('city', 'You must enter a valid city.').notEmpty();
   req.assert('state', 'You must enter a valid state.').notEmpty();
   req.assert('zip', 'You must enter a 5-digit zipcode').len(5);
-//  req.assert('phoneNumber', 'You must enter a valid phone number').isPhone();
+  req.assert('phoneNumber', 'You must enter a valid phone number').isMobilePhone();
 
   var errors = req.validationErrors();
 
@@ -90,7 +91,15 @@ exports.postRegister = function(req, res, next) {
 
   var user = new User({
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    nameLast: req.body.nameLast,
+    nameFirst: req.body.nameFirst,
+    phoneNumber: req.body.phoneNumber,
+    address1 : req.body.address1,
+    address2 : req.body.address2,
+    city : req.body.city,
+    state : req.body.state,
+    zip : req.body.zip
   });
 
   User.findOne({ email: req.body.email }, function(err, existingUser) {
@@ -178,7 +187,8 @@ exports.postDeleteAccount = function(req, res, next) {
     req.flash('info', { msg: 'Your account has been deleted.' });
     res.redirect('/');
   });
-};
+}
+ 
 
 /**
  * GET /account/unlink/:provider

@@ -9,9 +9,15 @@ var userSchema = new mongoose.Schema({
   tokens: Array,
 
   profile: {
-    name: { type: String, default: '' },
+    email: { type: String, default: '' },
+    nameLast: { type: String, default: ''},
+    nameFirst: { type: String, default: ''},
     phoneNumber: { type: String, default: '' },
-    address: { type: String, default: '' },
+    address1: { type: String, default: '' },
+    address2: { type: String, default: ''},
+    city: { type: String, default: ''},
+    state: { type: String, default: ''},
+    zip: { type: String, default: ''},
     email: { type: String, default: '' }
   },
 
