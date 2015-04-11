@@ -112,7 +112,9 @@ app.use(function(req, res, next) {
 app.get('/', homeController.index);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
+app.get('/appointments', appointmentsController.index);
 app.get('/appointments/schedule', appointmentsController.schedule);
+app.get('/faq', function(req, res){ res.render('faq', {});});
 
 app.get('/resume', resumeController.getResume);
 

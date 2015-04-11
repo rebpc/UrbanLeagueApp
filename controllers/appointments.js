@@ -18,3 +18,7 @@ exports.schedule = function(req, res) {
 	});
 	res.render('appointments/schedule', { availableTimes: availableTimes });
 };
+
+exports.index= function(req, res) {
+  res.render('appointments/index', {});
+};
