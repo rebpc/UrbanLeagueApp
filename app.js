@@ -115,10 +115,6 @@ app.get('/account/unlink/:provider', passportConf.isAuthenticated, userControlle
  */
 app.get('/api', apiController.getApi);
 app.get('/api/scraping', apiController.getScraping);
-app.get('/api/clockwork', apiController.getClockwork);
-app.post('/api/clockwork', apiController.postClockwork);
-app.get('/api/ordrin', apiController.getOrdrin);
-app.get('/api/lob', apiController.getLob);
 
 /**
  * OAuth authorization routes. (API examples)

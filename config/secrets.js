@@ -39,17 +39,4 @@ module.exports = {
     user: process.env.SENDGRID_USER || 'hslogin',
     password: process.env.SENDGRID_PASSWORD || 'hspassword00'
   },
-
-  clockwork: {
-    apiKey: process.env.CLOCKWORK_KEY || '9ffb267f88df55762f74ba2f517a66dc8bedac5a'
-  },
-
-  ordrin: {
-    publicKey: process.env.ORDRIN_PUBLIC || 'G35-rSt76CXpUEOlqXYNMC84ZbdFUKN_plHVHVYhdeU',
-    secretKey: process.env.ORDRIN_SECRET || 'bcoOR_2z6gQDZuEOcw1yTt6THFPK9KmvywG7UJD7pqQ'
-  },
-
-  lob: {
-    apiKey: process.env.LOB_KEY || 'test_814e892b199d65ef6dbb3e4ad24689559ca'
-  }
 };
