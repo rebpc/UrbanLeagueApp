@@ -11,6 +11,7 @@ var errorHandler = require('errorhandler');
 var lusca = require('lusca');
 var methodOverride = require('method-override');
 var multer  = require('multer');
+var handlebars = require('express4-handlebars');
 
 var _ = require('lodash');
 var MongoStore = require('connect-mongo')(session);
@@ -53,7 +54,16 @@ mongoose.connection.on('error', function() {
  */
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+
+// Register `hbs` as our view engine using its bound `engine()` function.
+// Set html in app.engine and app.set so express knows what extension to look for.
+app.engine('html', handlebars.__express);
+app.set('view engine', 'html');
+handlebars.set('layout_dir', path.join(path.join(__dirname, 'views'), ''));
+handlebars.set('partials_dir', path.join(path.join(__dirname, 'views'), 'partials'));
+handlebars.set('useLayout', true);
+handlebars.set('layout', 'layout');
+
 app.use(compress());
 app.use(connectAssets({
   paths: [path.join(__dirname, 'public/css'), path.join(__dirname, 'public/js')]
@@ -87,7 +97,7 @@ app.use(function(req, res, next) {
   if (/api/i.test(req.path)) req.session.returnTo = req.path;
   next();
 });
-app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
+//app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
 
 /**
  * Primary app routes.
@@ -95,6 +105,7 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
 app.get('/', homeController.index);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
+/*
 app.get('/logout', userController.logout);
 app.get('/forgot', userController.getForgot);
 app.post('/forgot', userController.postForgot);
@@ -109,16 +120,9 @@ app.post('/account/profile', passportConf.isAuthenticated, userController.postUp
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
+*/
 
-/**
- * API examples routes.
- */
-app.get('/api', apiController.getApi);
-app.get('/api/scraping', apiController.getScraping);
 
-/**
- * OAuth authorization routes. (API examples)
- */
 /**
  * Error Handler.
  */
