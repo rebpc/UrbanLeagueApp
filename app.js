@@ -31,6 +31,7 @@ var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
+var appointmentsController = require('./controllers/appointments');
 
 /**
  * API keys and Passport configuration.
@@ -110,6 +111,8 @@ app.use(function(req, res, next) {
 app.get('/', homeController.index);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
+app.get('/appointments/schedule', appointmentsController.schedule);
+
 /*
 app.get('/logout', userController.logout);
 app.get('/forgot', userController.getForgot);
