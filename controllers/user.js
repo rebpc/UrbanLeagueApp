@@ -56,30 +56,36 @@ exports.logout = function(req, res) {
 };
 
 /**
- * GET /signup
+ * GET /register
  * Signup page.
  */
-exports.getSignup = function(req, res) {
+exports.getRegister = function(req, res) {
   if (req.user) return res.redirect('/');
-  res.render('account/signup', {
+  res.render('account/register', {
     title: 'Create Account'
   });
 };
 
 /**
- * POST /signup
+ * POST /register
  * Create a new local account.
  */
-exports.postSignup = function(req, res, next) {
+exports.postRegister = function(req, res, next) {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('password', 'Your password must be at least 6 characters long').len(6);
-  req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
+  req.assert('passwordConfirm', 'Passwords do not match').equals(req.body.password);  req.assert('nameLast', 'You must enter a first name').notEmpty();
+  req.assert('nameFirst', 'You must enter a first name').notEmpty();
+  req.assert('address1', 'You must enter a valid street address.').notEmpty();
+  req.assert('city', 'You must enter a valid city.').notEmpty();
+  req.assert('state', 'You must enter a valid state.').notEmpty();
+  req.assert('zip', 'You must enter a 5-digit zipcode').len(5);
+//  req.assert('phoneNumber', 'You must enter a valid phone number').isPhone();
 
   var errors = req.validationErrors();
 
   if (errors) {
     req.flash('errors', errors);
-    return res.redirect('/signup');
+    return res.redirect('/register');
   }
 
   var user = new User({
@@ -90,7 +96,7 @@ exports.postSignup = function(req, res, next) {
   User.findOne({ email: req.body.email }, function(err, existingUser) {
     if (existingUser) {
       req.flash('errors', { msg: 'An account with that email address already exists.' });
-      return res.redirect('/signup');
+      return res.redirect('/register');
     }
     user.save(function(err) {
       if (err) return next(err);
@@ -120,7 +126,8 @@ exports.postUpdateProfile = function(req, res, next) {
   User.findById(req.user.id, function(err, user) {
     if (err) return next(err);
     user.email = req.body.email || '';
-    user.profile.name = req.body.name || '';
+    user.profile.nameLast = req.body.nameLast || '';
+    user.profile.nameFirst= req.body.nameFirst || '';
     user.profile.phoneNumber = req.body.phoneNumber || '';
     user.profile.address = req.body.address || '';
 
