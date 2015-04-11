@@ -11,7 +11,9 @@ var errorHandler = require('errorhandler');
 var lusca = require('lusca');
 var methodOverride = require('method-override');
 var multer  = require('multer');
-var handlebars = require('express4-handlebars');
+//var handlebars = require('express4-handlebars');
+var exphbs = require('express-handlebars');
+
 
 var _ = require('lodash');
 var MongoStore = require('connect-mongo')(session);
@@ -57,12 +59,15 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Register `hbs` as our view engine using its bound `engine()` function.
 // Set html in app.engine and app.set so express knows what extension to look for.
-app.engine('html', handlebars.__express);
-app.set('view engine', 'html');
-handlebars.set('layout_dir', path.join(path.join(__dirname, 'views'), ''));
-handlebars.set('partials_dir', path.join(path.join(__dirname, 'views'), 'partials'));
-handlebars.set('useLayout', true);
-handlebars.set('layout', 'layout');
+app.engine('.html', exphbs({defaultLayout: 'layout', extname: '.html'}));
+app.set('view engine', '.html');
+
+//app.engine('html', handlebars.__express);
+//app.set('view engine', 'html');
+//handlebars.set('layout_dir', path.join(path.join(__dirname, 'views'), ''));
+//handlebars.set('partials_dir', path.join(path.join(__dirname, 'views'), 'partials'));
+//handlebars.set('useLayout', true);
+//handlebars.set('layout', 'layout');
 
 app.use(compress());
 app.use(connectAssets({
