@@ -33,6 +33,8 @@ var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
 var appointmentsController = require('./controllers/appointments');
 
+var resumeController = require('./controllers/resume');
+
 /**
  * API keys and Passport configuration.
  */
@@ -91,7 +93,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(lusca({
-  csrf: false,
+  csrf: true,
   xframe: 'SAMEORIGIN',
   xssProtection: true
 }));
@@ -113,16 +115,16 @@ app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/appointments/schedule', appointmentsController.schedule);
 
+app.get('/resume', resumeController.getResume);
+
 /*
 app.get('/logout', userController.logout);
 app.get('/forgot', userController.getForgot);
 app.post('/forgot', userController.postForgot);
 app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
-*/
-app.get('/register', userController.getRegister);
-app.post('/register', userController.postRegister);
-/*
+app.get('/signup', userController.getSignup);
+app.post('/signup', userController.postSignup);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
