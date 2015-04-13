@@ -128,7 +128,6 @@ app.post('/signup', userController.postSignup);
 app.get('/register', userController.getRegister);
 app.post('/register', userController.postRegister);
 
->>>>>>> Updated Select a time page to display proper dates. Added contact page.
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 /*
