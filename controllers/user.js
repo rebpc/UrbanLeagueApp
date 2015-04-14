@@ -72,8 +72,9 @@ exports.getRegister = function(req, res) {
  */
 exports.postRegister = function(req, res, next) {
   req.assert('email', 'Email is not valid').isEmail();
+
   req.assert('password', 'Your password must be at least 6 characters long').len(6);
-  req.assert('passwordConfirm', 'Passwords do not match').equals(req.body.password);
+ /* req.assert('passwordConfirm', 'Passwords do not match').equals(req.body.password);
   req.assert('nameLast', 'You must enter a last name').notEmpty();
   req.assert('nameFirst', 'You must enter a first name').notEmpty();
   req.assert('address1', 'You must enter a valid street address.').notEmpty();
@@ -81,7 +82,7 @@ exports.postRegister = function(req, res, next) {
   req.assert('state', 'You must enter a valid state.').notEmpty();
   req.assert('zip', 'You must enter a 5-digit zipcode').len(5);
   req.assert('phoneNumber', 'You must enter a valid phone number').isMobilePhone();
-
+*/
   var errors = req.validationErrors();
 
   if (errors) {
