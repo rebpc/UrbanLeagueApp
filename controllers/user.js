@@ -93,8 +93,8 @@ exports.postRegister = function(req, res, next) {
   var user = new User({
     email: req.body.email,
     password: req.body.password,
-    nameLast: req.body.nameLast,
-    nameFirst: req.body.nameFirst,
+    lastName: req.body.nameLast,
+    firstName: req.body.nameFirst,
     phoneNumber: req.body.phoneNumber,
     address1 : req.body.address1,
     address2 : req.body.address2,

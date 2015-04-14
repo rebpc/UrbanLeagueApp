@@ -8,18 +8,15 @@ var userSchema = new mongoose.Schema({
 
   tokens: Array,
 
-  profile: {
-    email: { type: String, default: '' },
-    nameLast: { type: String, default: ''},
-    nameFirst: { type: String, default: ''},
-    phoneNumber: { type: String, default: '' },
-    address1: { type: String, default: '' },
-    address2: { type: String, default: ''},
-    city: { type: String, default: ''},
-    state: { type: String, default: ''},
-    zip: { type: String, default: ''},
-    email: { type: String, default: '' }
-  },
+  lastName: { type: String, default: ''},
+  firstName: { type: String, default: ''},
+  phoneNumber: { type: String, default: '' },
+  address1: { type: String, default: '' },
+  address2: { type: String, default: ''},
+  city: { type: String, default: ''},
+  state: { type: String, default: ''},
+  zip: { type: String, default: ''},
+  email: { type: String, default: '' },
 
   resetPasswordToken: String,
   resetPasswordExpires: Date
