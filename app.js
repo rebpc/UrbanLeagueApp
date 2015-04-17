@@ -114,7 +114,7 @@ app.get('/appointments/your-appointments', passportConf.isAuthenticated, appoint
 app.get('/faq', function(req, res){ res.render('faq', {});});
 
 app.get('/resume', passportConf.isAuthenticated, resumeController.getResume);
-
+app.post('/resume/update', passportConf.isAuthenticated, resumeController.postUpdateResume);
 
 app.get('/logout', userController.logout);
 
