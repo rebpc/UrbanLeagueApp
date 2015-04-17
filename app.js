@@ -73,7 +73,7 @@ app.set('view engine', '.html');
 
 app.use(compress());
 app.use(connectAssets({
-  paths: [path.join(__dirname, 'public/css'), path.join(__dirname, 'public/js')]
+  paths: [path.join(__dirname, 'public/css'), path.join(__dirname, 'public/js'), path.join(__dirname, 'public/images')]
 }));
 app.use(logger('dev'));
 app.use(bodyParser.json());
