@@ -78,7 +78,6 @@ app.use(connectAssets({
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(multer({ dest: path.join(__dirname, 'uploads') }));
 app.use(expressValidator());
 app.use(methodOverride());
 app.use(cookieParser());
@@ -109,32 +108,31 @@ app.use(function(req, res, next) {
 app.get('/', homeController.index);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
-app.get('/appointments', appointmentsController.index);
-app.get('/appointments/schedule', appointmentsController.schedule);
+app.get('/appointments', passportConf.isAuthenticated, appointmentsController.index);
+app.get('/appointments/schedule', passportConf.isAuthenticated, appointmentsController.schedule);
+app.get('/appointments/your-appointments', passportConf.isAuthenticated, appointmentsController.yourAppointments);
 app.get('/faq', function(req, res){ res.render('faq', {});});
 
-app.get('/resume', resumeController.getResume);
+app.get('/resume', passportConf.isAuthenticated, resumeController.getResume);
 
 
 app.get('/logout', userController.logout);
 
 app.get('/forgot', userController.getForgot);
 app.post('/forgot', userController.postForgot);
-/*
+
 app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
-*/
+
 app.get('/register', userController.getRegister);
 app.post('/register', userController.postRegister);
 
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
-/*
+
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
-app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
-*/
 
 
 /**

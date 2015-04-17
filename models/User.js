@@ -16,7 +16,6 @@ var userSchema = new mongoose.Schema({
   city: { type: String, default: ''},
   state: { type: String, default: ''},
   zip: { type: String, default: ''},
-  email: { type: String, default: '' },
 
   resetPasswordToken: String,
   resetPasswordExpires: Date
